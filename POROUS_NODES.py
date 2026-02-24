@@ -1,10 +1,10 @@
 import numpy as np
 
-def POROUS_NODES(NCONEC, KCONEC1, KCONEC2, corner1, corner2, NODES_MATCH_R1R2):
+def POROUS_NODES(NCONEC, KCONEC_1, KCONEC_2, POS_1, POS_2, NODES_MATCH):
 
     # Pre-round once
-    c1 = np.round(corner1, 4)
-    c2 = np.round(corner2, 4)
+    c1 = np.round(POS_1, 4)
+    c2 = np.round(POS_2, 4)
 
     store_r1 = []
     store_r2 = []
@@ -15,8 +15,8 @@ def POROUS_NODES(NCONEC, KCONEC1, KCONEC2, corner1, corner2, NODES_MATCH_R1R2):
     # ---------------------------------------------------------
     lookup = {}
 
-    for J2 in NODES_MATCH_R1R2[:, 3]:
-        nodes2 = KCONEC2[:, J2]
+    for J2 in NODES_MATCH[:, 3]:
+        nodes2 = KCONEC_2[:, J2]
 
         for K2, NODE2 in enumerate(nodes2):
             key = tuple(c2[NODE2])
@@ -25,8 +25,8 @@ def POROUS_NODES(NCONEC, KCONEC1, KCONEC2, corner1, corner2, NODES_MATCH_R1R2):
     # ---------------------------------------------------------
     # Search matches for REGION 1
     # ---------------------------------------------------------
-    for J1 in NODES_MATCH_R1R2[:, 2]:
-        nodes1 = KCONEC1[:, J1]
+    for J1 in NODES_MATCH[:, 2]:
+        nodes1 = KCONEC_1[:, J1]
 
         for K1, NODE1 in enumerate(nodes1):
             key = tuple(c1[NODE1])
@@ -36,19 +36,19 @@ def POROUS_NODES(NCONEC, KCONEC1, KCONEC2, corner1, corner2, NODES_MATCH_R1R2):
                     store_r1.append([NODE1, J1, K1])
                     store_r2.append([NODE2, J2, K2])
 
-    R1 = np.asarray(store_r1, dtype=int)
-    R2 = np.asarray(store_r2, dtype=int)
+    STORE_1 = np.asarray(store_r1, dtype=int)
+    STORE_2 = np.asarray(store_r2, dtype=int)
 
     # ---------------------------------------------------------
     # Remove consecutive duplicates (vectorized)
     # ---------------------------------------------------------
-    if len(R1) > 0:
-        mask = np.ones(len(R1), dtype=bool)
-        mask[1:] = np.any(R1[1:] != R1[:-1], axis=1)
-        R1 = R1[mask]
-        R2 = R2[mask]
+    if len(STORE_1) > 0:
+        mask = np.ones(len(STORE_1), dtype=bool)
+        mask[1:] = np.any(STORE_1[1:] != STORE_1[:-1], axis=1)
+        STORE_1 = STORE_1[mask]
+        STORE_2 = STORE_2[mask]
 
-    return R1, R2
+    return STORE_1, STORE_2
 
 
     
