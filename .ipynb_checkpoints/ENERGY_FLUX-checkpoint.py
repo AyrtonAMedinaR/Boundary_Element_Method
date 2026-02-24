@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.interpolate import griddata
 
-def ENERGY_FLUX_MOD(Coef, NCONEC, omega, rho, k, g, Wave_height, hd,
+def ENERGY_FLUX(Coef, NCONEC, omega, rho, k, g, Wave_height, hd,
                     COLUMNS_R0_LFF, corner0, KCONEC0,
                     COLUMNS_R6_RFF, corner6, KCONEC6,
                     N05):
