@@ -1,6 +1,6 @@
 import numpy as np
 
-def UPDATE_GUESS_HUANG_V2(Coef, N0, N01,
+def UPDATE_G_POROUS(Coef, N0, N01,
                                STORE_NODE_R1_POS, STORE_NODE_R2_POS,
                                k, omega, eps, l, Gporous,
                                POS1, NCONEC, POS2):
