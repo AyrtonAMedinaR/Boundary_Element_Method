@@ -310,10 +310,11 @@ def OUTER_REGION(lc,FLUME_WIDTH,hd,RADIO,GAP,TRANS_X,TRANS_Y,path,BATHY_X,BATHY_
 
     # SAVE THE MESH
     filename = 'OUTER_REGION.msh'
+    #filename = 'OUTER_REGION.m'
     gmsh.write(filename)
 
     # OPEN THE INTERFACE TO SEE THE MESH IN GMSH
-    # gmsh.fltk.run()
+    gmsh.fltk.run()
 
     # END THE PROGRAM
     gmsh.finalize()

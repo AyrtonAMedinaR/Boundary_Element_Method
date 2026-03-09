@@ -198,10 +198,11 @@ def INNER_REGION(lc,hd,RADIO,GAP,TRANS_X,TRANS_Y,path,ELEM_TOP):
 
     # SAVE THE MESH
     filename = 'INNER_REGION.msh'
+    #filename = 'INNER_REGION.m'
     gmsh.write(filename)
 
     # OPEN THE INTERFACE TO SEE THE MESH IN GMSH
-    # gmsh.fltk.run()
+    gmsh.fltk.run()
 
     # END THE PROGRAM
     gmsh.finalize()

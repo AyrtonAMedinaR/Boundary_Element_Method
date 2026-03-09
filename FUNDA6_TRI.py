@@ -1,50 +1,46 @@
 import numpy as np
-from numba import njit
 
-@njit(fastmath=False)
-def FUNDA6_TRI(XP, YP, ZP,
-                  ET1, ET2, ET3,
-                  XG, YG, ZG,
-                  hd):
+def FUNDA6_TRI(XI, ETA, X, hd):
 
-    eps = 1e-12
+    XP = XI[0]
+    YP = XI[1]
+    ZP = XI[2]
 
-    # -------- Primary distance
-    dx = XG - XP
-    dy = YG - YP
-    dz = ZG - ZP
+    XG = X[0]
+    YG = X[1]
+    ZG = X[2]
 
-    R2 = dx*dx + dy*dy + dz*dz
-    if R2 < eps:
-        R2 = eps
-    R = np.sqrt(R2)
+    # ---- Direct distance ----
+    RD1 = XG - XP
+    RD2 = YG - YP
+    RD3 = ZG - ZP
 
-    invR = 1.0 / R
+    R = np.sqrt(RD1**2 + RD2**2 + RD3**2)
 
-    RDN = (dx*ET1 + dy*ET2 + dz*ET3) * invR
+    RDN = (RD1*ETA[0] + RD2*ETA[1] + RD3*ETA[2]) / R
 
-    # -------- Image distance
-    dz2 = ZG + ZP + 2.0*abs(hd)
+    # ---- Image source (method of images) ----
+    RD1_2 = XG - XP
+    RD2_2 = YG - YP
+    RD3_2 = ZG + ZP + 2*np.abs(hd)
 
-    R2_2 = dx*dx + dy*dy + dz2*dz2
-    if R2_2 < eps:
-        R2_2 = eps
-    R_2 = np.sqrt(R2_2)
+    R_2 = np.sqrt(RD1_2**2 + RD2_2**2 + RD3_2**2)
 
-    invR2 = 1.0 / R_2
+    RDN_2 = (RD1_2*ETA[0] + RD2_2*ETA[1] + RD3_2*ETA[2]) / R_2
 
-    RDN_2 = (dx*ET1 + dy*ET2 + dz2*ET3) * invR2
+    # ---------------------------
+    # Constants
+    c = 1.0 / (4.0*np.pi)
 
-    inv4pi = 1.0 / (4.0*np.pi)
+    # ---------------------------
+    # Fundamental solutions
+    U_real = c*(1.0/R + 1.0/R_2)
 
-    # -------- Fundamental solutions
-    U_real = inv4pi * (invR + invR2)
+    Q_real = -c*((RDN/R)/R + (RDN_2/R_2)/R_2)
 
-    Q_real = -inv4pi * (RDN*invR*invR + RDN_2*invR2*invR2)
+    QS = -c*(RDN/(R*R) + RDN_2/(R_2*R_2))
 
-    QS = -inv4pi * (RDN/R2 + RDN_2/R2_2)
-
-    # Force complex
+    # Force complex type
     U = U_real + 0j
     Q = Q_real + 0j
 

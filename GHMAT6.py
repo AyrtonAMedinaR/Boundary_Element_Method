@@ -32,6 +32,14 @@ def GHMAT6(POS, NCONEC, KCONEC, NE, N, hd):
         ETA1, ETA2, ETA3, XJA, XG1, XG2, XG3, FF = \
             ETAXJA(XJ1, XJ2, XJ3, NCONEC)
 
+        # if IEJ == 184:
+            # print(IEJ)
+            # print(ETA1)
+            # print(ETA2)
+            # print(ETA3)
+            # print("Processing complete.")
+            # input("Press Enter to continue...")
+
         # --------------------------------------------------
         for IN in range(N):
 
@@ -51,11 +59,28 @@ def GHMAT6(POS, NCONEC, KCONEC, NE, N, hd):
                     XJA, XG1, XG2, XG3,
                     FF, XI, NCONEC, hd
                 )
+
+                # if IEJ == 184 and IN == 768:
+                    # print(IEJ)
+                    # #print(HW)
+                    # print(GW)
+                    # #print(HS)
+                    # print("Processing complete.")
+                    # input("Press Enter to continue...")
+
             else:
                 HW, GW, HS, HDIF = LOCIN6(
                     XJ1, XJ2, XJ3,
                     NODO, NCONEC, hd
                 )
+
+                # if IEJ == 184 and IN == 768:
+                    # print(IEJ)
+                    # #print(HW)
+                    # print(GW)
+                    # #print(HS)
+                    # print("Processing complete.")
+                    # input("Press Enter to continue...")             
 
             # ---- Diagonal terms ----
             D1 = 0.0 + 0.0j
@@ -66,6 +91,14 @@ def GHMAT6(POS, NCONEC, KCONEC, NE, N, hd):
                     D1 -= HS[I]
                 if IN == 0:
                     HS11 += D1
+
+                # if IEJ == 184:
+                    # print(IEJ)
+                    # print(D1)
+                    # print(HS11)
+                    # print("Processing complete.")
+                    # input("Press Enter to continue...") 
+                    
             else:
                 for I in range(NCONEC):
                     if I == NODO:
@@ -75,13 +108,29 @@ def GHMAT6(POS, NCONEC, KCONEC, NE, N, hd):
                         if IN == 0:
                             HS11 -= HS[I]
 
+                # if IEJ == 184:
+                    # print(IEJ)
+                    # print(D2)
+                    # print(HS11)
+                    # print("Processing complete.")
+                    # input("Press Enter to continue...")                             
+
             # ---- Assembly ----
             for K in range(NCONEC):
 
                 IK = KCONEC[K, IEJ]
                 col = K + NCONEC * IEJ
-
+                
                 FI[IN, col] += GW[K]
+
+                # if IEJ == 184 and IN == 768:
+                    # print(IEJ)
+                    # print(IN)
+                    # print(col)
+                    # print(FI[IN, col])
+                    # print("Processing complete.")
+                    # input("Press Enter to continue...")                     
+                    # print("   ")                
 
                 if IN == IK:
                     A[IN, IN] += D2

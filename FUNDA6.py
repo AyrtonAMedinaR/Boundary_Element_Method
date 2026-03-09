@@ -24,8 +24,8 @@ def FUNDA6(XI, ETA, XG1, XG2, XG3, K, hd):
     RD3 = ZG - ZP
 
     R2 = RD1*RD1 + RD2*RD2 + RD3*RD3
-    if R2 < eps:
-        R2 = eps
+    # if R2 < eps:
+    #     R2 = eps
     R = np.sqrt(R2)
 
     RDN = (RD1*ETA[0] + RD2*ETA[1] + RD3*ETA[2]) / R
