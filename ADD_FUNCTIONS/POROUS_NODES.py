@@ -3,8 +3,8 @@ import numpy as np
 def POROUS_NODES(NCONEC, KCONEC_1, KCONEC_2, POS_1, POS_2, NODES_MATCH):
 
     # Pre-round once
-    c1 = np.round(POS_1, 4)
-    c2 = np.round(POS_2, 4)
+    c1 = np.round(POS_1, 3)
+    c2 = np.round(POS_2, 3)
 
     store_r1 = []
     store_r2 = []

@@ -30,10 +30,10 @@ def VISUAL_FREE_SURFACE(Coef, k, omega, g, Wave_height, hd, NCONEC, ELEM_FS, POS
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     
-    surf = ax.plot_surface(X_GRID, Y_GRID, Z_GRID, cmap="jet", alpha=0.25)
+    surf = ax.plot_surface(X_GRID, Y_GRID, Z_GRID, cmap="jet", alpha=0.01)
     
     ax.scatter(POS_1[:,0], POS_1[:,1], POS_1[:,2],
-               color=(0.05,0.05,0.05), s=2)
+                color=(0.05,0.05,0.05), s=0.5)
     
     contourLevels = np.linspace(-1.5, 1.5, 101)
     
@@ -46,7 +46,7 @@ def VISUAL_FREE_SURFACE(Coef, k, omega, g, Wave_height, hd, NCONEC, ELEM_FS, POS
     ax.set_ylabel("y")
     ax.set_zlabel("z")
 
-    ax.set_box_aspect([7.5,5,1])  # axis equal
+    ax.set_box_aspect([7.5,0.5,5.0])  # axis equal
     
     # surf.set_clim(-1.5, 1.5)
 

@@ -43,6 +43,8 @@ def ELEMENT_CONNECTION(NCONEC, KCONEC, POS, NE):
     REF_ELEM["FRONT"]       = np.where(tags == 7)[0]
     REF_ELEM["BACK"]        = np.where(tags == 8)[0]
 
+    REF_ELEM["POROUS"]      = np.where(tags == 3)[0]
+    
     # POROUS_31 ... POROUS_50
     for val in range(31, 51):
         REF_ELEM[f"POROUS_{val}"] = np.where(tags == val)[0]

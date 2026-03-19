@@ -14,7 +14,7 @@ def NODES_FS(NCONEC, ELEM_BOUNDARY, KCONEC, N, NE, Region):
 
     KS = 0
 
-    for J in ELEM_BOUNDARY + NE_prev:
+    for J in ELEM_BOUNDARY: # + NE_prev:
         for I in range(NCONEC):
             IK = KCONEC_M[I, J]
             NODE_BOUNDARY[KS] = IK
