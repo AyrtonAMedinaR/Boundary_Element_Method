@@ -12,15 +12,15 @@ def setRecombine(SV_params):
         gmsh.model.mesh.setRecombine(2,localParam)
 
 def SEMI_CIRCULAR(hd,RADIUS,WIDTH,LX):
-
-    # LENGTH OF THE ELEMENTS IN GMSH
-    lc  = 0.50
     
     # NUMBERS OF ELEMENTS FOR MESH
     ELEM = 7;
-    ELEM_ARCS = 7;
+    ELEM_ARCS = 6;
       
-    DX = 0.50*hd;
+    DX = 0.10*hd;
+
+    # LENGTH OF THE ELEMENTS IN GMSH
+    lc = hd/10;
        
     path = os.getcwd()   
     os.chdir(path)
@@ -268,13 +268,13 @@ def SEMI_CIRCULAR(hd,RADIUS,WIDTH,LX):
     # SQUARE BASE NEXT TO THE CYLINDER
     # -------------------------
     for i in range(32, 40):  # {33:40}
-        geom.mesh.setTransfiniteCurve(l[i], ELEM_ARCS, "Progression", 1)
+        geom.mesh.setTransfiniteCurve(l[i], 5, "Progression", 1)
     
     # -------------------------
     # REST OF THE DOMAIN X
     # -------------------------
     for i in range(22, 30):  # {23:30}
-        geom.mesh.setTransfiniteCurve(l[i], ELEM * 2, "Progression", 1)
+        geom.mesh.setTransfiniteCurve(l[i], ELEM * 3, "Progression", 1)
     
     # -------------------------
     # REST OF THE DOMAIN Y

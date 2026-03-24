@@ -16,7 +16,7 @@ def VISUAL_FREE_SURFACE(Coef, k, omega, g, Wave_height, hd, NCONEC, ELEM_FS, POS
     xx_BC = POS_0[NODOS_UNI, 0]
     yy_BC = POS_0[NODOS_UNI, 1]
 
-    zz_BC = np.real((1j * omega / g) * PHI * np.exp(-1j * omega * np.pi / omega)) / (Wave_height / 2)
+    zz_BC = np.real((1j * omega / g) * PHI * np.exp(-1j * omega * np.pi / omega))
 
     # GRID
     xv = np.linspace(np.min(xx_BC), np.max(xx_BC), 501)
@@ -25,33 +25,59 @@ def VISUAL_FREE_SURFACE(Coef, k, omega, g, Wave_height, hd, NCONEC, ELEM_FS, POS
     X_GRID, Y_GRID = np.meshgrid(xv, yv)
 
     Z_GRID = griddata((xx_BC, yy_BC), zz_BC, (X_GRID, Y_GRID), method='linear')
-
-    # PLOT
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
     
-    surf = ax.plot_surface(X_GRID, Y_GRID, Z_GRID, cmap="jet", alpha=0.01)
+    # Optional scaling for visualization
+    scale_z = 1
+    Z_plot = Z_GRID * scale_z
+    
+    contourLevels = np.linspace(np.nanmin(Z_plot), np.nanmax(Z_plot), 101)
+    
+    # DOMAIN LIMITS
+    x_min, x_max = np.min(POS_0[:,0]), np.max(POS_0[:,0])
+    y_min, y_max = np.min(POS_0[:,1]), np.max(POS_0[:,1])
+    z_min, z_max = np.min(POS_0[:,2]), np.max(POS_0[:,2])
+    
+    Lx = x_max - x_min
+    Ly = y_max - y_min
+    Lz = z_max - z_min
+    
+    if Lz == 0:
+        Lz = 1e-6
+    
+    
+    # ============================================================
+    # FIGURE 1: 3D VIEW
+    # ============================================================
+    
+    fig1 = plt.figure()
+    ax = fig1.add_subplot(111, projection='3d')
+    
+    surf = ax.plot_surface(X_GRID, Y_GRID, Z_plot, cmap="jet", alpha=0.8)
     
     ax.scatter(POS_1[:,0], POS_1[:,1], POS_1[:,2],
-                color=(0.05,0.05,0.05), s=0.5)
+                color=(0.05,0.05,0.05), s=0.01)
     
-    contourLevels = np.linspace(-1.5, 1.5, 101)
-    
-    ax.contour(X_GRID, Y_GRID, Z_GRID, levels=contourLevels)
-    
-    cb = fig.colorbar(surf, ax=ax)
-    cb.set_label(r'$\bar{\eta}$')
+    ax.contour(X_GRID, Y_GRID, Z_plot, levels=contourLevels)
     
     ax.set_xlabel("x")
     ax.set_ylabel("y")
     ax.set_zlabel("z")
-
-    ax.set_box_aspect([7.5,0.5,5.0])  # axis equal
+    ax.set_title("3D Free Surface")
     
-    # surf.set_clim(-1.5, 1.5)
-
-    fig.savefig("free_surface.png", dpi=300, bbox_inches="tight")
+    # Aspect ratio
+    ax.set_box_aspect([Lx, Ly, Lz])
     
+    ax.set_xlim(x_min, x_max)
+    ax.set_ylim(y_min, y_max)
+    ax.set_zlim(z_min, z_max)
+    
+    cb1 = fig1.colorbar(surf, ax=ax)
+    cb1.set_label(r'$\eta$')
+    
+    fig1.savefig("free_surface_3D.png", dpi=300, bbox_inches="tight")
+    
+    # ------------------------------------------------------------
     plt.show()
+    
 
-    return PHI
+    return zz_BC

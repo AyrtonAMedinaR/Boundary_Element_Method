@@ -1,6 +1,6 @@
 import numpy as np
 
-def ELEMENT_CONNECTION(NCONEC, KCONEC, POS, NE):
+def ELEMENT_CONNECTION(NCONEC, KCONEC, POS, NE, N_STRUCT):
     # """
     # NCONEC  : number of nodes per element (9)
     # KCONEC : (10, NE) array
@@ -46,7 +46,7 @@ def ELEMENT_CONNECTION(NCONEC, KCONEC, POS, NE):
     REF_ELEM["POROUS"]      = np.where(tags == 3)[0]
     
     # POROUS_31 ... POROUS_50
-    for val in range(31, 51):
+    for val in range(31, 31 + N_STRUCT):
         REF_ELEM[f"POROUS_{val}"] = np.where(tags == val)[0]
 
     return REF_ELEM, NORMAL
