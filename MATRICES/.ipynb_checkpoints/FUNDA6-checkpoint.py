@@ -1,58 +1,51 @@
 import numpy as np
 from numba import njit
+import math
 
 @njit(fastmath=True)
-def FUNDA6(XI, ETA, XG1, XG2, XG3, K, hd):
+def FUNDA6(XI, ETA, X, DEPTH):
 
-    # --- Field point ---
+    # --- Field (collocation) point ---
     XP = XI[0]
     YP = XI[1]
     ZP = XI[2]
 
     # --- Source (Gauss) point ---
-    XG = XG1[K]
-    YG = XG2[K]
-    ZG = XG3[K]
+    XG = X[0]
+    YG = X[1]
+    ZG = X[2]    
 
-    # ---------------------------
-    # Primary image
+    # ---- Direct distance ----
     RD1 = XG - XP
     RD2 = YG - YP
     RD3 = ZG - ZP
 
-    R2 = RD1*RD1 + RD2*RD2 + RD3*RD3
-    R = np.sqrt(R2)
+    R = math.sqrt(RD1*RD1 + RD2*RD2 + RD3*RD3)
 
     RDN = (RD1*ETA[0] + RD2*ETA[1] + RD3*ETA[2]) / R
 
-    # ---------------------------
-    # Mirror image
-    RD1_2 = XG - XP
-    RD2_2 = YG - YP
-    RD3_2 = ZG + ZP + 2.0*abs(hd)
+    # ---- Image source ----
+    RD1_2 = RD1
+    RD2_2 = RD2
+    RD3_2 = ZG + ZP + 2.0*DEPTH
 
-    R2_2 = RD1_2*RD1_2 + RD2_2*RD2_2 + RD3_2*RD3_2
-    R_2 = np.sqrt(R2_2)
+    R_2 = math.sqrt(RD1_2*RD1_2 + RD2_2*RD2_2 + RD3_2*RD3_2)
 
     RDN_2 = (RD1_2*ETA[0] + RD2_2*ETA[1] + RD3_2*ETA[2]) / R_2
 
-    # ---------------------------
-    # Constants
-    c = 1.0 / (4.0*np.pi)
+    # ---- Constants ----
+    c = 1.0 / (4.0 * math.pi)
 
-    # ---------------------------
-    # Fundamental solutions
-    U_real = c*(1.0/R + 1.0/R_2)
+    invR = 1.0 / R
+    invR2 = 1.0 / R_2
 
-    Q_real = -c*((RDN/R)/R + (RDN_2/R_2)/R_2)
+    # ---- Fundamental solutions ----
+    U_real = c * (invR + invR2)
 
-    QS = -c*(RDN/(R*R) + RDN_2/(R_2*R_2))
+    Q_real = -c * (RDN * invR * invR + RDN_2 * invR2 * invR2)    
 
-    # Force complex type
-    U = U_real + 0j
-    Q = Q_real + 0j
+    # complex outputs (required by BEM matrix assembly)
+    U = complex(U_real, 0.0)
+    Q = complex(Q_real, 0.0)
 
-    return U, Q, QS
-
-
-
+    return U, Q

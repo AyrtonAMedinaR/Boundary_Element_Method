@@ -14,7 +14,8 @@ def BC_FAR_FIELD(A, B, k, NCONEC, ELEM_FF, KCONEC, NE, Region):
 
     for J in ELEM_FF + NE_prev:
 
-        IKs = KCONEC[:, J]     
+        # IKs = KCONEC[:, J]     
+        IKs = KCONEC[0:NCONEC, J]     
         cols_B = J*NCONEC + np.arange(NCONEC)
 
         A[:, IKs] -= 1j * k * B[:, cols_B]

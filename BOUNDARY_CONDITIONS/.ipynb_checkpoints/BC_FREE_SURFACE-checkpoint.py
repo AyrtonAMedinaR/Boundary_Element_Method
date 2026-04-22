@@ -17,9 +17,7 @@ def BC_FREE_SURFACE(A, B, omega, g, NCONEC, ELEM_FS, KCONEC, NE, Region):
 
     for J in ELEM_FS + NE_prev:
         for K in range(NCONEC):
-
             IK = KCONEC[K, J]
-
             A[:, IK] = A[:, IK] - factor * B[:, J*NCONEC + K]
-
+  
     return A

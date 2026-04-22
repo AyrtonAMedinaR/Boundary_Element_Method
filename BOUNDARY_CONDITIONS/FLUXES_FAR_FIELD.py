@@ -16,10 +16,13 @@ def FLUXES_FAR_FIELD(PHI, DPHI, k, NCONEC, ELEM_SCATT, KCONEC, N, NE, Region):
 
     factor = (1j * k)
 
-    for J in ELEM_SCATT + NE_prev:
+    # for J in ELEM_SCATT + NE_prev:
+    for J in ELEM_SCATT:
 
-        nodes = KCONEC[:, J]
+        # nodes = KCONEC[:, J]
+        # nodes = KCONEC[0:NCONEC, J]
+        nodes = KCONEC[0:NCONEC, J] + N_prev
 
-        DPHI[:, J] = ( factor * PHI[nodes - N_prev] )
+        DPHI[:, J + NE_prev] = ( factor * PHI[nodes] )
 
     return DPHI

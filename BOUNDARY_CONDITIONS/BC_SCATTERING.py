@@ -1,6 +1,6 @@
 import numpy as np
 
-def BC_SCATTERING(Wave_height, k, omega, gravity, h, POS, NCONEC, ELEM_SCATT, KCONEC, N, NE, Region):
+def BC_SCATTERING(BC_SCAT, Wave_height, k, omega, gravity, h, POS, NCONEC, ELEM_SCATT, KCONEC, N, NE, Region):
 
     # Wave_height: Wave height
     # k: Wavenumber 
@@ -18,13 +18,12 @@ def BC_SCATTERING(Wave_height, k, omega, gravity, h, POS, NCONEC, ELEM_SCATT, KC
     N_prev  = sum(N[0:Region]) 
     NE_prev = sum(NE[0:Region]) 
 
-    BC_SCAT = np.zeros_like(KCONEC, dtype=np.complex128)
-
     factor = -(gravity * k * Wave_height / omega)
 
     for J in ELEM_SCATT + NE_prev:
 
-        nodes = KCONEC[:, J]
+        #nodes = KCONEC[:, J]
+        nodes = KCONEC[0:NCONEC, J]
         XM = POS[nodes - N_prev, 0]
         ZM = POS[nodes - N_prev, 2]
 

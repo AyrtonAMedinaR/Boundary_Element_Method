@@ -9,52 +9,52 @@ def EXTIN6(ETA1, ETA2, ETA3,
               XG1, XG2, XG3,
               FF,
               XI,
-              NCONEC,
-              hd):
+              NCONEC, DEPTH):
 
-    # ---- Gauss weights (hardcoded for Numba)
+    # Gauss weights
     OME = np.array((
         0.467913934572691, 0.467913934572691,
         0.360761573048139, 0.360761573048139,
         0.171324492379170, 0.171324492379170
     ))
 
+    # Element integrals
     HW = np.zeros(NCONEC, dtype=np.complex128)
     GW = np.zeros(NCONEC, dtype=np.complex128)
-    HS = np.zeros(NCONEC, dtype=np.complex128)  # float64
 
+    # For a total of 36 points in a 6x6 grid
     NPG = 6
 
     for i in range(NPG):
         for j in range(NPG):
 
+            # Order number of Gauss point
             K = NPG*i + j
 
-            # --- normal components directly (avoid array creation)
+            # Normal components
             eta1 = ETA1[K]
             eta2 = ETA2[K]
             eta3 = ETA3[K]
 
-            # ---------- weight
+            # Weight
             w = XJA[K] * OME[i] * OME[j]
 
-            # ---------- fundamental solution
-            U, Q, QS = FUNDA6(
+            # Fundamental solution
+            U, Q = FUNDA6(
                 XI,
                 np.array((eta1, eta2, eta3)),
-                XG1, XG2, XG3,
-                K,
-                hd
+                np.array((XG1[K], XG2[K], XG3[K])), 
+                DEPTH
             )
 
             for n in range(NCONEC):
                 P12 = FF[n, K] * w
 
+                # Summation for integrals
                 GW[n] += U  * P12
                 HW[n] += Q  * P12
-                HS[n] += QS * P12
 
-    return HW, GW, HS
+    return HW, GW
 
 
 

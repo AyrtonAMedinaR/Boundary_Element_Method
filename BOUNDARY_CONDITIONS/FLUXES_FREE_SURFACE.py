@@ -17,10 +17,11 @@ def FLUXES_FREE_SURFACE(PHI, DPHI, omega, gravity, NCONEC, ELEM_SCATT, KCONEC, N
 
     factor = (omega**2/gravity)
 
-    for J in ELEM_SCATT + NE_prev:
+    for J in ELEM_SCATT:
 
-        nodes = KCONEC[:, J]
+        # nodes = KCONEC[:, J]
+        nodes = KCONEC[0:NCONEC, J] + N_prev
 
-        DPHI[:, J] = ( factor * PHI[nodes - N_prev] )
+        DPHI[:, J + NE_prev] = ( factor * PHI[nodes] )
 
     return DPHI
