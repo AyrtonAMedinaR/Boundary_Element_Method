@@ -107,8 +107,9 @@ Make sure the Gmsh Python module works:
 import gmsh
 ```
 
-# Repository Structure
-Core Solver Modules
+# Repository Structure (Core Solver Modules)
+
+BEM utilities for quadratic elements
 
 ```
 BEM_UTILS/
@@ -122,6 +123,20 @@ General utilities used by the solver:
 - Hydrodynamic forces
 - Energy flux computation
 - Free surface visualization
+
+BEM utilities for constant elements
+
+```
+BEM_UTILS_CONSTANT/
+```
+
+BEM utilities for linear elements
+
+```
+BEM_UTILS_LINEAR/
+```
+
+
 
 
 
