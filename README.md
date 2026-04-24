@@ -310,29 +310,24 @@ Author: Ayrton A. Medina Rodríguez 3D Boundary Element Method for Linear Water 
 
 ---
 
-# Contributing
+# 🤝 Contributing
 
-Contributions and improvements are welcome.
-
-Suggested contributions:
-- Performance improvements
-- Documentation updates
-- New tutorial cases
+Any contributions you make are **greatly appreciated**.
 
 ---
 
-# License
+# 📄 License
 
-MIT
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-# Contact
+# 📬 Contact
 
-For questions or collaboration:
+**Ayrton Medina** GitHub: [@AyrtonAMedinaR](https://github.com/AyrtonAMedinaR)  
+Email: [ayrtonamedinar@gmail.com](mailto:ayrtonamedinar@gmail.com)
 
-Ayrton Medina (ayrtonamedinar@gmail.com)
-
+Project Link: [https://github.com/AyrtonAMedinaR/Boundary_Element_Method](https://github.com/AyrtonAMedinaR/Boundary_Element_Method)
 
 
 
