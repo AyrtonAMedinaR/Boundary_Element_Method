@@ -9,7 +9,13 @@ The code is designed for research in:
 - Artificial reefs  
 - Porous and impermeable structures  
 - Multi-domain wave interaction problems  
-- Wave energy and OWC devices  
+- Wave energy and OWC devices
+
+## Reef ball simulation
+
+<p align="center">
+  <img src="docs/fig_wave_field.png" width="600">
+</p>
 
 The code computes hydrodynamic quantities such as:
 - Velocity potential and fluxes
@@ -63,9 +69,59 @@ Outputs include:
 ```bash
 git clone https://github.com/AyrtonAMedinaR/Boundary_Element_Method.git
 cd Boundary_Element_Method
+```
+---
 
-## Example simulation
+## 2. Create virtual environment
 
-<p align="center">
-  <img src="docs/fig_wave_field.png" width="600">
-</p>
+```
+python -m venv bem_env
+bem_env\Scripts\activate   # Windows
+```
+
+## 3. Install dependencies
+
+```
+pip install -r requirements.txt
+```
+
+# GMSH
+
+Dependencies
+Main packages:
+
+numpy
+scipy
+matplotlib
+gmsh (Python API)
+
+You must install Gmsh separately:
+
+```
+https://gmsh.info
+```
+
+Make sure the Gmsh Python module works:
+
+```
+import gmsh
+```
+
+# Repository Structure
+Core Solver Modules
+
+```
+BEM_UTILS/
+```
+
+General utilities used by the solver:
+
+- Mesh processing
+- Boundary identification
+- Internal field evaluation
+- Hydrodynamic forces
+- Energy flux computation
+- Free surface visualization
+
+
+
