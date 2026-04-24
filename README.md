@@ -4,19 +4,12 @@ Python implementation of a 3D frequency–domain Boundary Element Method (BEM) t
 (impermeable and perforated) structures using quadratic (high-order) elements.
 
 The code is designed for research in:
-
 - Wave–structure interaction
 - Coastal protection structures
 - Artificial reefs
 - Wave energy and OWC devices
 - Porous and impermeable structures  
 - Multi-domain wave interaction problems  
-
-## Reef ball simulation
-
-<p align="center">
-  <img src="docs/fig_wave_field.png" width="600">
-</p>
 
 The code computes hydrodynamic quantities such as:
 - Velocity potential and fluxes
