@@ -324,10 +324,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 # 📬 Contact
 
-**Ayrton Medina** GitHub: [@AyrtonAMedinaR](https://github.com/AyrtonAMedinaR)  
-Email: [ayrtonamedinar@gmail.com](mailto:ayrtonamedinar@gmail.com)
+**Ayrton Medina** [Email](mailto:ayrtonamedinar@gmail.com) | [GitHub](https://github.com/AyrtonAMedinaR) | [Google Scholar](https://scholar.google.com/citations?user=lUxvlWsAAAAJ) | [ResearchGate](https://www.researchgate.net/profile/Ayrton-Alfonso-Medina-Rodriguez?ev=hdr_xprf)
 
 Project Link: [https://github.com/AyrtonAMedinaR/Boundary_Element_Method](https://github.com/AyrtonAMedinaR/Boundary_Element_Method)
-
 
 
