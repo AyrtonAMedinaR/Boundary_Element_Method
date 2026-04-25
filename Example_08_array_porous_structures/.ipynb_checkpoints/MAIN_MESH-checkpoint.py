@@ -8,11 +8,11 @@ from pathlib import Path
 
 def MAIN_MESH(hd,FLUME_WIDTH,RADIO,HEIGHT,BATHY_X,LOC_STRUCT_X,LOC_STRUCT_Y):
     
-    from .OUTER_REGION import OUTER_REGION
-    from .INNER_REGION import INNER_REGION
+    from OUTER_REGION import OUTER_REGION
+    from INNER_REGION import INNER_REGION
        
     # LENGTH OF THE ELEMENTS IN GMSH
-    lc  = 0.50
+    lc  = 1.00
     
     # NUMBERS OF ELEMENTS FOR MESH
     ELEM_TOP = 6

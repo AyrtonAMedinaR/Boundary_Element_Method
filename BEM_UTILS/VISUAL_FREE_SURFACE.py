@@ -52,7 +52,9 @@ def VISUAL_FREE_SURFACE(Coef, k, omega, g, Wave_height, hd, NCONEC, ELEM_FS, POS
     fig1 = plt.figure(figsize=(10,6))
     ax = fig1.add_subplot(111, projection='3d')
     
-    surf = ax.plot_surface(X_GRID, Y_GRID, Z_plot, cmap="jet", alpha=0.8)
+    surf = ax.plot_surface(X_GRID, Y_GRID, Z_plot, cmap="jet", alpha=0.9, 
+                       linewidth=0, 
+                       antialiased=False)
     
     ax.scatter(POS_1[:,0], POS_1[:,1], POS_1[:,2],
                 color=(0.10,0.10,0.10), s=0.01)
