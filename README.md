@@ -7,9 +7,7 @@ The code is designed for research in:
 - Wave–structure interaction
 - Coastal protection structures
 - Artificial reefs
-- Wave energy and OWC devices
-- Porous and impermeable structures  
-- Multi-domain wave interaction problems  
+- OWC wave energy converter devices  
 
 The code computes hydrodynamic quantities such as:
 - Velocity potential and fluxes
@@ -17,7 +15,7 @@ The code computes hydrodynamic quantities such as:
 - Wave forces
 
 This repository is intended for research and educational use in coastal and ocean engineering. 
-It includes a complete solver, utilities, and step-by-step tutorials.
+It includes a complete solver, utilities, and step-by-step examples.
 
 ---
 
