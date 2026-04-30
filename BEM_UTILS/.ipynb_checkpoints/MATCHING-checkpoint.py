@@ -1,51 +1,39 @@
+from scipy.spatial import cKDTree
 import numpy as np
 
-def MATCHING(COLUMNS_R1_R2, POS1, KCONEC1,
-             COLUMNS_R2_R1, POS2, KCONEC2):
+def MATCHING(REF_1, POS_1, KCONEC_1, REF_2, POS_2, KCONEC_2, tol=1e-6):
 
-    REDON = 3
+    # ---- interface nodes (center nodes of elements) ----
+    nodes_R1 = KCONEC_1[8, REF_1]
+    nodes_R2 = KCONEC_2[8, REF_2]
 
-    # ---- BUILD BNL1 ----
-    n1 = POS1.shape[0]
-    BNL1 = np.zeros((n1,4))
-    BNL1[:,0] = np.arange(0, n1)
-    BNL1[:,1] = np.round(POS1[:,0], REDON)
-    BNL1[:,2] = np.round(POS1[:,1], REDON)
-    BNL1[:,3] = np.round(POS1[:,2], REDON)
+    coords_R1 = POS_1[nodes_R1]
+    coords_R2 = POS_2[nodes_R2]
 
-    # ---- BUILD BNL2 ----
-    n2 = POS2.shape[0]
-    BNL2 = np.zeros((n2,4))
-    BNL2[:,0] = np.arange(0, n2)
-    BNL2[:,1] = np.round(POS2[:,0], REDON)
-    BNL2[:,2] = np.round(POS2[:,1], REDON)
-    BNL2[:,3] = np.round(POS2[:,2], REDON)
+    # ---- KD-tree search ----
+    tree = cKDTree(coords_R2)
+    dist, idx = tree.query(coords_R1, distance_upper_bound=tol)
 
-    # ---- NODES INVOLVED IN INTERFACE ----
-    POS1_R1R2 = KCONEC1[8, COLUMNS_R1_R2]
-    POS2_R2R1 = KCONEC2[8, COLUMNS_R2_R1]
+    # check failures
+    if np.any(np.isinf(dist)):
+        bad = np.where(np.isinf(dist))[0][0]
+        raise ValueError(
+            f"No matching interface node found within tol. "
+            f"Distance = {dist[bad]}"
+        )
 
-    NODES_MATCH = np.zeros((len(POS1_R1R2),4), dtype=int)
+    # ---- build NODES_MATCH ----
+    N = len(nodes_R1)
+    NODES_MATCH = np.zeros((N,4), dtype=int)
 
-    JJJ = 0
+    NODES_MATCH[:,0] = nodes_R1                # node in R1
+    NODES_MATCH[:,1] = nodes_R2[idx]          # matching node in R2
 
-    for J in POS1_R1R2:
-        for K in POS2_R2R1:
-            if np.all(BNL1[J,1:4] == BNL2[K,1:4]):
-                NODES_MATCH[JJJ,0] = BNL1[J,0]
-                NODES_MATCH[JJJ,1] = BNL2[K,0]
-                JJJ += 1
+    # ---- build fast node→element maps ----
+    node_to_elem_R1 = {KCONEC_1[8,e]: e for e in REF_1}
+    node_to_elem_R2 = {KCONEC_2[8,e]: e for e in REF_2}
 
-    # ---- IDENTIFY CONNECTED ELEMENTS ----
-
-    for J in range(int(np.min(COLUMNS_R1_R2)), int(np.max(COLUMNS_R1_R2))+1):
-        for K in range(len(POS1_R1R2)):
-            if KCONEC1[8,J] == NODES_MATCH[K,0]:
-                NODES_MATCH[K,2] = J
-
-    for J in range(int(np.min(COLUMNS_R2_R1)), int(np.max(COLUMNS_R2_R1))+1):
-        for K in range(len(POS1_R1R2)):
-            if KCONEC2[8,J] == NODES_MATCH[K,1]:
-                NODES_MATCH[K,3] = J
+    NODES_MATCH[:,2] = [node_to_elem_R1[n] for n in nodes_R1]
+    NODES_MATCH[:,3] = [node_to_elem_R2[n] for n in NODES_MATCH[:,1]]
 
     return NODES_MATCH

@@ -1,15 +1,13 @@
 import numpy as np
 
 def COS_DIR_LINEAR(KCONEC, J, X, Y, Z):
-    # """
+
     # KCONEC : (10, NE) connectivity array
     # J      : element index (0-based in Python!)
     # X,Y,Z  : node coordinate arrays (size Nnodes)
 
     # Returns
-    # -------
     # ETA : (3,) unit normal vector
-    # """
 
     # Node numbers (convert MATLAB->Python indexing)
     N1 = KCONEC[0, J]

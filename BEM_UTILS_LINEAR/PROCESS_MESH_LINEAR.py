@@ -2,6 +2,7 @@ import meshio
 import numpy as np
 
 def PROCESS_MESH_LINEAR(filename):
+    
     # Reads a .msh file and extracts point coordinates and quad9 elements 
     # combined with their physical group data.
     

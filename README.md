@@ -1,7 +1,6 @@
 # 3D Boundary Element Method for Linear Water Waves
 
-Python implementation of a 3D frequency–domain Boundary Element Method (BEM) to simulate linear wave interaction with submerged 
-(impermeable and perforated) structures using quadratic (high-order) elements.
+Python implementation of a 3D frequency–domain Boundary Element Method (BEM) to simulate linear wave interaction with submerged  (impermeable and perforated) structures using quadratic (high-order) elements.
 
 The code is designed for research in:
 - Wave–structure interaction
@@ -21,36 +20,28 @@ It includes a complete solver, utilities, and step-by-step examples.
 
 # Main Features
 
-- 3D frequency-domain Boundary Element Method  
-- Multi-domain capability  
-- Porous and impermeable boundaries  
-- Constant, linear and quadratic boundary elements  
+- 3D frequency-domain Boundary Element Method
+- Higher-order elements discretisation for improved accuracy
+- Constant and linear elements examples for comparison
+- Multi-domain capability (for porous structures or large domains)
+- Porous and impermeable boundary condition
 - Radiation and scattering problems  
 - Hydrodynamic force computation  
 - Energy flux for reflection and transmission analysis  
 - Oblique wave incidence  
-- Gmsh mesh workflow  
-- Fully reproducible tutorials
+- Mesh generation with Gmsh via .geo scripts or the Python API, with ready-to-use examples provided
+- Fully reproducible examples
 
 ---
 
-# Theory Overview
+# Workflow
 
-The solver computes the velocity potential **φ** by solving the boundary integral equation for linear water waves.
-
-It supports:
-
-- Scattering problems  
-- Radiation problems  
-- Coupled multi-region domains  
-- Porous media modelling via modified boundary conditions  
-
-Outputs include:
-
-- Reflection and transmission coefficients (CR, CT)  
-- Free surface elevation  
-- Hydrodynamic forces (Fx, Fy, Fz)  
-- Energy flux across control surfaces  
+The workflow followed in all provided examples is:
+- Define the fluid domain and generate the mesh using Gmsh
+- Extract mesh and geometric characteristics
+- Assemble and compute influence matrices
+- Apply boundary conditions
+- Post-process and analyse results
 
 ---
 
@@ -142,9 +133,9 @@ Implements all boundary conditions:
 - Scattering conditions
 - Oblique wave incidence
 - Interface coupling (multi-domain)
--  Porous boundary formulation
+- Porous boundary formulation
 
-Quadratic-element version:
+Quadratic and linear element version:
 
 ```
 BOUNDARY_CONDITIONS/
@@ -186,7 +177,7 @@ MATRICES_LINEAR/
 
 # Tutorials
 
-The repository includes complete step-by-step tutorials that serve as examples and validation cases.
+The repository includes complete step-by-step examples that serve as examples and validation cases.
 
 ## Tutorial 01 — Empty Basin
 
@@ -194,95 +185,157 @@ Single and multi-domain wave propagation in an empty wave flume or basin.
 Normal and oblique wave propagation can be considered.
 
 ```
-Tutorial_01_multi_domain_empty/
-```
-
-Outputs:
-
-- Free surface validation
-- Reflection/transmission coefficients
-
-
-## Tutorial 02 — Submerged Semi-Circle (Impermeable)
-
-```
-Tutorial_02_submerged_semi_circle_impermeable/
+Example_01_empty_wave_flume/
 ```
 
 Outputs:
 
 - Free surface elevation
-- Hydrodynamic forces
+- Reflection/transmission coefficients
 
-##  Tutorial 03 — Multi-Domain Semi-Circle
 
-```
-Tutorial_03_multi_domain_submerged_semi_circle_impermeable/
-```
+## Tutorial 02 — Submerged Semi-Circle (Impermeable)
 
-Demonstrates multi-region coupling.
-
-##  Tutorial 04 — Porous Semi-Circle (Multi-Domain)
+Single-domain wave propagation over a submerged semi-circular obstacle.
+Includes automated mesh generation using the Gmsh Python API.
 
 ```
-Tutorial_04_multi_domain_semi_circle_porous/
+Example_02_submerged_semi_circle_obstacle/
 ```
 
-Demonstrates porous boundary modelling.
+Outputs:
 
-##  Tutorial 05 — Porous Semi-Circle (Single Domain)
+- Reflection/transmission coefficients
+- Hydrodynamic forces 
+- Free surface elevation
+- Internal points calculation
 
-```
-Tutorial_05_semi_circle_porous/
-```
+## Example 03 — Multi-Domain Semi-Circle
 
-Includes automated mesh generation.
-
-##  Tutorial 06 — Half Sphere
-
-```
-Tutorial_06_half_sphere/
-```
-
-3D validation case:
-- Impermeable sphere
-- Porous sphere
-
-##  Tutorial 07 — Array of Impermeable Structures
+Multi-domain wave propagation over a submerged semi-circular obstacle.
 
 ```
-Tutorial_07_array_struct_impermeable/
+Example_03_multi_domain_submerged_semi_circle_obstacle/
 ```
 
-Wave interaction with multiple bodies.
+Outputs:
 
-##  Tutorial 08 — Array of Porous Structures
+- Reflection/transmission coefficients
+- Hydrodynamic forces 
+- Free surface elevation
+- Internal points calculation
+
+
+## Example 04 — Porous Semi-Circle (Multi-Domain)
+
+Multi-domain wave propagation over a submerged porous semi-circular obstacle.
 
 ```
-Tutorial_08_array_struct_porous/
+Example_04_multi_domain_porous_semi_circle_obstacle/
 ```
 
-Demonstrates porous array behaviour.
+Outputs:
 
-##  Tutorial 09 — Cylindrical Oscillating Water Column (OWC)
+- Reflection/transmission coefficients
+- Hydrodynamic forces 
+
+## Example 05 — Porous Semi-Circle (Single Domain)
+
+Single-domain wave propagation over a submerged porous semi-circular obstacle.
+Includes automated mesh generation using the Gmsh Python API.
 
 ```
-Tutorial_09_Cylindrical_OWC/
+Example_05_porous_semi_circle_obstacle/
 ```
 
-Wave energy application:
-- OWC performance metrics
+Outputs:
 
-##  Constant and Linear Element Examples
+- Reflection/transmission coefficients
+- Hydrodynamic forces 
+
+## Example 06 — Half Sphere (porous and impermeable)
+
+Single-domain wave propagation over a submerged porous/impermeable half-sphere obstacle.
+Includes automated mesh generation using the Gmsh Python API.
+
+```
+Example_06_half_sphere_reef/
+```
+
+Outputs:
+
+- Hydrodynamic forces 
+- Free surface elevation
+
+## Example 07 — Array of Impermeable Structures
+
+Single-domain wave propagation over submerged impermeable cylindrical obstacles.
+Includes automated mesh generation using the Gmsh Python API.
+
+```
+Example_07_array_submerged_structures/
+```
+
+Outputs:
+
+- Reflection/transmission coefficients
+- Hydrodynamic forces 
+- Free surface elevation
+
+## Example 08 — Array of Porous Structures
+
+Multi-domain wave propagation over submerged porous cylindrical obstacles.
+Includes automated mesh generation using the Gmsh Python API.
+
+```
+Example_08_array_porous_structures/
+```
+
+Outputs:
+
+- Reflection/transmission coefficients
+- Hydrodynamic forces 
+- Free surface elevation
+
+## Example 09 — Thick-Wall Cylindrical Oscillating Water Column (OWC)
+
+Multi-domain wave interaction with a Thick-Wall Cylindrical Oscillating Water Column (OWC).
+Includes automated mesh generation using the Gmsh Python API.
+
+```
+Example_09_Cylindrical_OWC_device/
+```
+
+Outputs:
+
+- Reflection/transmission coefficients
+- Hydrodynamic performance quantities
+
+
+## Example 10 — Thin-Wall Cylindrical Oscillating Water Column (OWC)
+
+Multi-domain wave interaction with a Thin-Wall Cylindrical Oscillating Water Column (OWC).
+Includes automated mesh generation using the Gmsh Python API.
+
+```
+Example_10_Thin_cylindrical_OWC_device/
+```
+
+Outputs:
+
+- Reflection/transmission coefficients
+- Hydrodynamic performance quantities 
+ 
+##  Constant and Linear Element Examples for empty wave flume water wave propagation
 
 Comparison between discretization approaches.
 
 ```
-Tutorial_CONSTANT_ELEMENTS/
+Example_empty_wave_flume_CONSTANT_ELEMENTS/
 ```
 
 ```
-Tutorial_LINEAR_ELEMENTS/
+Example_empty_wave_flume_LINEAR_ELEMENTS/
 ```
 
 ---
@@ -302,9 +355,9 @@ Each tutorial contains:
 
 # Citation
 
-If you use this code in academic work, please cite:
+If you use this code in academic work, please cite this repository using the **“Cite this repository”** feature provided by GitHub.
 
-Author: Ayrton A. Medina Rodríguez 3D Boundary Element Method for Linear Water Waves
+A `CITATION.cff` file is included in the root of the project to automatically generate the recommended citation in BibTeX, APA, and other formats.
 
 ---
 

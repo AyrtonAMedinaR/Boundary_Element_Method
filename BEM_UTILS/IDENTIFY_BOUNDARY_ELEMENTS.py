@@ -43,6 +43,7 @@ def IDENTIFY_BOUNDARY_ELEMENTS(NCONEC, KCONEC, POS, NE, N_STRUCT):
     REF_ELEM["FRONT"]       = np.where(tags == 7)[0]
     REF_ELEM["BACK"]        = np.where(tags == 8)[0]
     REF_ELEM["INT_FS"]      = np.where(tags == 9)[0]
+    REF_ELEM["MATCH_OWC"]   = np.where(tags == 10)[0]
 
     # Get all unique tags present in the array
     unique_tags = np.unique(tags)

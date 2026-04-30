@@ -16,7 +16,7 @@ def INT_FLUX_FS_S(Coef, omega, g, NCONEC, ELEM, POS, KCONEC, N, NE, Region):
 
     xx_R1 = POS[NODOS_UNI - N_prev, 0]
     yy_R1 = POS[NODOS_UNI - N_prev, 1]
-    zz_R1 = PHI_R
+    zz_R1 = (omega**2 / g) * PHI_R
 
     # --- GRID ---
     xv_R1 = np.linspace(np.min(xx_R1), np.max(xx_R1), 101)

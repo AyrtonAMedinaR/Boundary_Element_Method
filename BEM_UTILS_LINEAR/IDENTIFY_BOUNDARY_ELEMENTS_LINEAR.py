@@ -1,17 +1,15 @@
 import numpy as np
 
 def IDENTIFY_BOUNDARY_ELEMENTS_LINEAR(NCONEC, KCONEC, POS, NE, N_STRUCT):
-    # """
+
     # NCONEC  : number of nodes per element (9)
     # KCONEC : (10, NE) array
     # POS    : (N1,3) array
     # NE     : number of elements
 
     # Returns
-    # -------
     # REF_ELEM : dictionary of element groups
     # NORMAL  : (NE,3) array of normals
-    # """
 
     from .COS_DIR_LINEAR import COS_DIR_LINEAR
 
