@@ -23,7 +23,7 @@ def MATCHING(REF_1, POS_1, KCONEC_1,
     # Returns
     # NODES_MATCH : (N,4) int array
     #     col 0 → center node in R1
-    #     col 1 → matching center node in R2
+    #     col 1 → center node in R2
     #     col 2 → element index in R1
     #     col 3 → element index in R2
 
@@ -60,8 +60,7 @@ def MATCHING(REF_1, POS_1, KCONEC_1,
     NODES_MATCH[:, 3] = [node_to_elem_R2[n] for n in NODES_MATCH[:, 1]]
 
     return NODES_MATCH
-
-
+    
 # ==========================================================
 # STEP 2 — MATCH NODES INSIDE EACH ELEMENT PAIR
 # ==========================================================
@@ -133,7 +132,7 @@ def MATCHING_NODES(NCONEC, KCONEC_1, KCONEC_2,
 def MATCHING_INTERFACES(REF_1, POS_1, KCONEC_1,
                      REF_2, POS_2, KCONEC_2,
                      NCONEC,
-                     tol=1e-6):
+                     tol=1e-5):
     
     # Convenience wrapper that performs the full matching pipeline.
 

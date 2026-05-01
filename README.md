@@ -155,7 +155,10 @@ Main influence matrices:
 - Numerical integration
 - Fundamental solutions
 
-Quadratic / higher order elements
+The influence matrix functions implemented in this repository are based on the formulations presented in Domínguez (1993). 
+The original implementation was provided in FORTRAN (for Elastodynamics applications), which has been reformulated and simplified in Python for this work.
+
+Domínguez, J. (1993). Boundary Elements in Dynamics: Computational Engineering. WIT Press.
 
 ```
 MATRICES/
@@ -355,9 +358,17 @@ Each tutorial contains:
 
 # Citation
 
-If you use this code in academic work, please cite this repository using the **“Cite this repository”** feature provided by GitHub.
+If you use this repository in academic work, please cite both the implementation and the original formulation source:
 
-A `CITATION.cff` file is included in the root of the project to automatically generate the recommended citation in BibTeX, APA, and other formats.
+## This work
+A. A. Medina Rodríguez (2026). *3D Boundary Element Method for Linear Water Waves*.
+
+GitHub Repository: https://github.com/your-username/your-repo-name
+
+## Theoretical foundation
+Domínguez, J. (1993). *Boundary Elements in Dynamics: Computational Engineering* (Illustrated ed.). WIT Press.  
+International Series on Computational Engineering / Topics in Engineering.  
+ISBN: 978-1853122583.
 
 ---
 
