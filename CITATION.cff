@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+title: "3D Frequency-Domain Boundary Element Method for Water Waves"
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Medina Rodríguez"
+    given-names: "Ayrton Alfonso"
+date-released: 2026-01-01
+url: "https://github.com/yourusername/your-repo"
