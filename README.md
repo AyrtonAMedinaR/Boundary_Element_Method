@@ -178,11 +178,11 @@ MATRICES_LINEAR/
 
 ---
 
-# Tutorials
+# Examples
 
 The repository includes complete step-by-step examples that serve as examples and validation cases.
 
-## Tutorial 01 — Empty Basin
+## Example 01 — Empty Basin
 
 Single and multi-domain wave propagation in an empty wave flume or basin.
 Normal and oblique wave propagation can be considered.
@@ -197,7 +197,7 @@ Outputs:
 - Reflection/transmission coefficients
 
 
-## Tutorial 02 — Submerged Semi-Circle (Impermeable)
+## Example 02 — Submerged Semi-Circle (Impermeable)
 
 Single-domain wave propagation over a submerged semi-circular obstacle.
 Includes automated mesh generation using the Gmsh Python API.
