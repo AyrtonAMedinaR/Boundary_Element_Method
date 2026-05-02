@@ -16,6 +16,25 @@ The code computes hydrodynamic quantities such as:
 This repository is intended for research and educational use in coastal and ocean engineering. 
 It includes a complete solver, utilities, and step-by-step examples.
 
+## Publications
+
+The following peer-reviewed publications use or are directly related to this 3D Boundary Element Method.
+
+**Medina Rodríguez, A.A., Huang, Z., R3D Consortium (2026)**  
+Wave Scattering and Energy Reduction by a Patch of Idealized Coral-Growing Units.  
+In: *Coastal Dynamics 2025*, Coastal Research Library, Vol. 41, Springer.  
+https://doi.org/10.1007/978-3-032-15473-6_85
+
+**Medina Rodríguez, A.A., Trivedi, K., Koley, S., Oderiz Martinez, I., Mendoza, E., Posada Vanegas, G., Silva, R. (2023)**  
+Improved hydrodynamic performance of an OWC device based on a Helmholtz resonator.  
+*Energy*, Volume 273, 127299.  
+https://doi.org/10.1016/j.energy.2023.127299
+
+**Medina Rodríguez, A.A., Silva Casarín, R., Blanco Ilzarbe, J.M. (2022)**  
+A 3D boundary element method for analysing the hydrodynamic performance of a land-fixed oscillating water column device.  
+*Engineering Analysis with Boundary Elements*, Volume 138, pp. 407-422.  
+https://doi.org/10.1016/j.enganabound.2022.02.014
+
 ---
 
 # Main Features
@@ -42,6 +61,115 @@ The workflow followed in all provided examples is:
 - Assemble and compute influence matrices
 - Apply boundary conditions
 - Post-process and analyse results
+
+# Theory
+
+The Cartesian coordinate system is adopted and the origin is assumed at the undisturbed free surface water level. Waves propagate and approach the structures from the left in the $x$ direction, in water of depth $DEPTH$. The water flow is considered incompressible and irrotational, and the effect of surface tension is neglected. Linear water wave theory and linear hydrodynamic interactions are investigated under the assumption that the wave amplitude is much smaller than the wavelength.  A simple harmonic flow with angular frequency $\omega$ and velocity potential
+
+$$
+\Phi(x,y,z,t) = \textrm{Re}( \phi(x,y,z)\textrm{e}^{-\textrm{i}\omega t} )
+$$
+
+is assumed.
+
+In this expression, $\textrm{Re}( )$ denotes the real part of the complex expression, $i=\sqrt{-1}$, $t$ represents time, and $\phi(x,y,z)$ is the complex amplitude of the total velocity potential.
+
+### Governing Equations and Boundary Conditions
+
+Under the previous assumptions, the 3D Laplace equation governs the flow field:
+
+$$
+\left(
+\frac{\partial^{2}}{\partial x^{2}}+
+\frac{\partial^{2}}{\partial y^{2}}+
+\frac{\partial^{2}}{\partial z^{2}}
+\right) \phi=0,
+$$
+
+The linearity of the problem allows decomposition of the velocity potential as
+
+$$
+\phi = \phi^{I} + \phi^{S},
+$$
+
+where $\phi^{I}$ and $\phi^{S}$ are the incident and scattered velocity potentials, respectively.
+
+The incident velocity potential is
+
+$$
+\phi^{I} = -\frac{\textrm{i}g A}{\omega}
+\frac{\cosh k ( z + h )}{\cosh k h}
+\textrm{e}^{ikx}
+$$
+
+where $A$ is the incident wave amplitude, $g$ is gravitational acceleration and $k$ is the wave number obtained from the dispersion relation
+
+$$
+\omega^{2}=gk\tanh(kh)
+$$
+
+### Free Surface Condition
+
+At the still water level, the linearized free-surface condition is
+
+$$
+\frac{\partial \phi}{\partial z}- K\phi = 0,
+\quad (x,y,z)\in S_{FS},
+$$
+
+where $K=\omega^{2}/g$.
+
+
+### Seabed and Back Wall Boundary Conditions
+
+The seabed and wave flume walls are assumed impermeable. Therefore,
+
+Bottom boundary:
+
+$$
+\frac{\partial \phi}{\partial z}=0,
+\quad (x,y,z)\in S_{BOTTOM}
+$$
+
+Back wall:
+
+$$
+\frac{\partial \phi}{\partial x}=0,
+\quad (x,y,z)\in S_{FRONT}, S_{BACK}
+$$
+
+### Radiation Condition
+
+At the far field, the Sommerfeld radiation condition is applied:
+
+$$
+\frac{\partial (\phi - \phi^{I})}{\partial x} + i k (\phi - \phi^{I}) = 0, \qquad x \to -\infty
+$$
+
+$$
+\frac{\partial \phi}{\partial x} + i k \phi  = 0, \qquad x \to +\infty
+$$
+
+### Continuity at Domain Interfaces (Multi-domain)
+
+Continuity of potential and flux is enforced at the interface of Domain 0 and Domain 1 ($S_{OUT,0}$ and $S_{IN,1}$):
+
+$$
+\phi_{0} = \phi_{1}, \qquad 
+\vec{n_{0}}\cdot\nabla\phi_{0} = -\vec{n_{1}}\cdot\nabla\phi_{1}
+$$
+
+The gradient operator is
+
+$$
+\nabla =
+\frac{\partial}{\partial x}\mathbf{i}+
+\frac{\partial}{\partial y}\mathbf{j}+
+\frac{\partial}{\partial z}\mathbf{k}
+$$
+
+The minus sign indicates that the outgoing flux from one subdomain equals the incoming flux in the adjacent domain because outward normals are opposite.
+
 
 ---
 
@@ -73,11 +201,10 @@ pip install -r requirements.txt
 
 Dependencies
 Main packages:
-
-numpy
-scipy
-matplotlib
-gmsh (Python API)
+- numpy
+- scipy
+- matplotlib
+- gmsh (Python API)
 
 You must install Gmsh separately:
 
