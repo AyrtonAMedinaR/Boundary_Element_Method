@@ -16,6 +16,12 @@ The code computes hydrodynamic quantities such as:
 This repository is intended for research and educational use in coastal and ocean engineering. 
 It includes a complete solver, utilities, and step-by-step examples.
 
+<p align="center">
+  <img width="600" height="552" alt="RANDOM_LAYOUT" src="https://github.com/user-attachments/assets/c79ad3ef-f7a6-41cc-93c8-5a75ff619db7" />
+  <br>
+  <em>Wave interaction with a random layout of submerged perforated cylinders simulated using the 3D BEM.</em>
+</p>
+
 ## Publications
 
 The following peer-reviewed publications use or are directly related to this 3D Boundary Element Method.
