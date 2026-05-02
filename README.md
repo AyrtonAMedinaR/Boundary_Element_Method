@@ -496,7 +496,7 @@ If you use this repository in academic work, please cite both the implementation
 ## This work
 A. A. Medina Rodríguez (2026). *3D Boundary Element Method for Linear Water Waves*.
 
-GitHub Repository: https://github.com/AyrtonAMedinarR/Boundary_Element_Method
+GitHub Repository: https://github.com/AyrtonAMedinaR/Boundary_Element_Method
 
 ## Theoretical foundation
 Domínguez, J. (1993). *Boundary Elements in Dynamics: Computational Engineering* (Illustrated ed.). WIT Press.  
