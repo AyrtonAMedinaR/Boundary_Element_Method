@@ -19,7 +19,7 @@ It includes a complete solver, utilities, and step-by-step examples.
 <p align="center">
   <img width="600" height="552" alt="RANDOM_LAYOUT" src="https://github.com/user-attachments/assets/c79ad3ef-f7a6-41cc-93c8-5a75ff619db7" />
   <br>
-  <em>Wave interaction with a random layout of submerged perforated cylinders simulated using the 3D BEM.</em>
+  <em>Wave interaction with a random layout of submerged perforated cylinders simulated using the 3D BEM (Medina Rodriguez et al, 2026).</em>
 </p>
 
 ## Publications
