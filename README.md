@@ -156,7 +156,7 @@ Main influence matrices:
 - Fundamental solutions
 
 The influence matrix functions implemented in this repository are based on the formulations presented in Domínguez (1993). 
-The original implementation was provided in FORTRAN (for Elastodynamics applications), which has been reformulated and simplified in Python for this work.
+The original implementation was provided in FORTRAN (for Elastodynamics applications), which has been both reformulated and simplified in Python for this work.
 
 Domínguez, J. (1993). Boundary Elements in Dynamics: Computational Engineering. WIT Press.
 
