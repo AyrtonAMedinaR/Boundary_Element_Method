@@ -5,6 +5,15 @@ def BC_INTERFACE(A, B, NCONEC,
                         R1_STRUCT,
                         N, NE, Region_M, Region_N):
 
+    # A and B: Coefficient matrices 
+    # NCONEC: Number of nodes in a quad element 
+    # R0_STRUCT: Elements belonging to the interface in region M
+    # R1_STRUCT: Element belonging to the interface in region N
+    # N: Total number of nodes
+    # NE: Total number of elements
+    # Region_M: Region where the BC is applied
+    # Region_N: Region where the BC is applied
+
     N_prev_M  = sum(N[0:Region_M])
     N_prev_N  = sum(N[0:Region_N])
 

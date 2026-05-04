@@ -8,7 +8,7 @@ def BC_FREE_SURFACE(A, B, omega, g, NCONEC, ELEM_FS, KCONEC, NE, Region):
     # NCONEC: Number of nodes in a quad element 
     # ELEM_FS: Elements belonging to the free surface
     # KCONEC: Element connectivity array
-    # NE: Total number of elements in each region
+    # NE: Total number of elements
     # Region: Region where the BC is applied
 
     NE_prev = sum(NE[0:Region])

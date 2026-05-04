@@ -7,7 +7,7 @@ def BC_FAR_FIELD(A, B, k, NCONEC, ELEM_FF, KCONEC, NE, Region):
     # NCONEC: Number of nodes in a quad element 
     # ELEM_FF: Elements belonging to the far field
     # KCONEC: Element connectivity array
-    # NE: Total number of elements in each region
+    # NE: Total number of elements
     # Region: Region where the BC is applied   
 
     NE_prev = sum(NE[0:Region]) 

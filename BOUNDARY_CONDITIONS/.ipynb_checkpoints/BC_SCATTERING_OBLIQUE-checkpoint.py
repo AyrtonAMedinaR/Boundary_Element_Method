@@ -7,12 +7,13 @@ def BC_SCATTERING_OBLIQUE(BC_SCAT, Wave_height, k, omega, gravity, h, THETA, POS
     # omega: Frequency
     # gravity: Gravitational accelaration
     # h: Water depth
+    # Theta: Angle in radians    
     # POS: x, y and z location of each node
     # NCONEC: Number of nodes in a quad element 
     # ELEM_SCATT: Elements belonging to the region where incident velocity potential is applied
     # KCONEC: Element connectivity array    
-    # N: Total number of nodes in each region
-    # NE: Total number of elements in each region
+    # N: Total number of nodes
+    # NE: Total number of elements
     # Region: Region where the BC is applied
     
     N_prev  = sum(N[0:Region]) 

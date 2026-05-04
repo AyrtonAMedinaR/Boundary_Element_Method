@@ -1,27 +1,42 @@
 import numpy as np
 
-def UPDATE_G_POROUS(Coef, N0, N01,
-                               STORE_NODE_R1_POS, STORE_NODE_R2_POS,
-                               k, omega, eps, l, Gporous,
-                               POS1, NCONEC, POS2):
+def UPDATE_G_POROUS(Coef, k, omega, eps, l, Gporous, NCONEC, R0_STRUCT, R1_STRUCT, POS_M, POS_N, N, Region_M, Region_N):
+
+    # Coef: Vector containing PHI values  
+    # k: Wavenumber 
+    # omega: Frequency     
+    # eps: Porosity
+    # l: Jet length
+    # Gporous: Porosity parameter    
+    # NCONEC: Number of nodes in a quad element 
+    # R0_STRUCT: Nodes, elements and position (from 1 to 9) of structure in region 0
+    # R1_STRUCT: Nodes, elements and position (from 1 to 9) of structure in region 1
+    # POS_M: x, y and z location of each nod in domain M
+    # POS_N: x, y and z location of each nod in domain M
+    # N: Total number of nodes
+    # Region_M: Outer region where the BC is applied   
+    # Region_N: Inner region where the BC is applied   
+    
+    N_prev_M  = sum(N[0:Region_M])
+    N_prev_N  = sum(N[0:Region_N])
 
     varphi = 0.6 + 0.4 * eps**2
     alpha = (1/(eps*varphi) - 1)**2
 
-    R1 = STORE_NODE_R1_POS[:,0].reshape(-1, NCONEC)
-    R2 = STORE_NODE_R2_POS[:,0].reshape(-1, NCONEC)
+    R_M = R0_STRUCT[:,0].reshape(-1, NCONEC)
+    R_N = R1_STRUCT[:,0].reshape(-1, NCONEC)
 
-    dPHI = 1j*k*Gporous*(Coef[R1+N0] - Coef[R2+N01])
+    dPHI = 1j*k*Gporous*(Coef[R_M+N_prev_M] - Coef[R_N+N_prev_N])
 
     Sup = np.abs(dPHI)**3
     Inf = np.abs(dPHI)**2
 
-    n1 = R1[:,0]
-    n2 = R1[:,1]
-    n8 = R1[:,7]
+    n1 = R_M[:,0]
+    n2 = R_M[:,1]
+    n8 = R_M[:,7]
 
-    dx = np.linalg.norm(POS1[n1] - POS1[n2], axis=1)
-    dy = np.linalg.norm(POS1[n1] - POS1[n8], axis=1)
+    dx = np.linalg.norm(POS_M[n1] - POS_M[n2], axis=1)
+    dy = np.linalg.norm(POS_M[n1] - POS_M[n8], axis=1)
 
     w = dx * dy / 4
 

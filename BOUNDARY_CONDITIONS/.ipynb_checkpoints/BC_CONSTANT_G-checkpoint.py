@@ -7,8 +7,8 @@ def BC_CONSTANT_G(A, B, k, NCONEC, R0_STRUCT, R1_STRUCT, N, NE, Gporous, Region_
     # NCONEC: Number of nodes in a quad element 
     # R0_STRUCT: Nodes, elements and position (from 1 to 9) of structure in region 0
     # R1_STRUCT: Nodes, elements and position (from 1 to 9) of structure in region 1 
-    # N: Total number of nodes in each region
-    # NE: Total number of elements in each region
+    # N: Total number of nodes
+    # NE: Total number of elements
     # Gporous: Porosity parameter
     # Region_M: Outer region where the BC is applied   
     # Region_N: Inner region where the BC is applied   

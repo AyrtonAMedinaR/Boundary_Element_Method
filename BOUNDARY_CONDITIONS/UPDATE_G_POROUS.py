@@ -1,6 +1,21 @@
 import numpy as np
 
 def UPDATE_G_POROUS(Coef, k, omega, eps, l, Gporous, NCONEC, R0_STRUCT, R1_STRUCT, POS_M, POS_N, N, Region_M, Region_N):
+
+    # Coef: Vector containing PHI values  
+    # k: Wavenumber 
+    # omega: Frequency     
+    # eps: Porosity
+    # l: Jet length
+    # Gporous: Porosity parameter    
+    # NCONEC: Number of nodes in a quad element 
+    # R0_STRUCT: Nodes, elements and position (from 1 to 9) of structure in region 0
+    # R1_STRUCT: Nodes, elements and position (from 1 to 9) of structure in region 1
+    # POS_M: x, y and z location of each nod in domain M
+    # POS_N: x, y and z location of each nod in domain M
+    # N: Total number of nodes
+    # Region_M: Outer region where the BC is applied   
+    # Region_N: Inner region where the BC is applied   
     
     N_prev_M  = sum(N[0:Region_M])
     N_prev_N  = sum(N[0:Region_N])

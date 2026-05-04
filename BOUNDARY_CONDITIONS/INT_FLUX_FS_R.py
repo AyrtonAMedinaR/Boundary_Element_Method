@@ -2,6 +2,17 @@ import numpy as np
 from scipy.interpolate import griddata
 
 def INT_FLUX_FS_R(Coef, omega, g, NCONEC, ELEM, POS, KCONEC, N, NE, Region):
+
+    # Coef: Vector containing PHI values
+    # omega: Frequency 
+    # gravity: Gravitational acceleration     
+    # NCONEC: Number of nodes in a quad element 
+    # ELEM: Elements belonging to this BC
+    # POS: x, y and z location of each node    
+    # KCONEC: Element connectivity array    
+    # N: Total number of nodes
+    # NE: Total number of elements
+    # Region: Region where the BC is applied    
     
     from BEM_UTILS.NODES_FS import NODES_FS
 

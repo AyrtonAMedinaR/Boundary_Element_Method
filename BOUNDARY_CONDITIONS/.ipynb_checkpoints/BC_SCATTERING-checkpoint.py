@@ -2,6 +2,7 @@ import numpy as np
 
 def BC_SCATTERING(BC_SCAT, Wave_height, k, omega, gravity, h, POS, NCONEC, ELEM_SCATT, KCONEC, N, NE, Region):
 
+    # BC_SCAT: Initizalize array    
     # Wave_height: Wave height
     # k: Wavenumber 
     # omega: Frequency
@@ -11,8 +12,8 @@ def BC_SCATTERING(BC_SCAT, Wave_height, k, omega, gravity, h, POS, NCONEC, ELEM_
     # NCONEC: Number of nodes in a quad element 
     # ELEM_SCATT: Elements belonging to the region where incident velocity potential is applied
     # KCONEC: Element connectivity array    
-    # N: Total number of nodes in each region
-    # NE: Total number of elements in each region
+    # N: Total number of nodes
+    # NE: Total number of elements
     # Region: Region where the BC is applied
     
     N_prev  = sum(N[0:Region]) 

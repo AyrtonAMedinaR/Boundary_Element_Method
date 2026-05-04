@@ -5,6 +5,15 @@ def FLUXES_INTERFACE(PHI, DPHI,
                         R1_STRUCT,
                         N, NE, Region_M, Region_N):
 
+    # PHI: velocity potential
+    # DPHI: array with fluxes        
+    # R0_STRUCT: Elements belonging to the interface in region M
+    # R1_STRUCT: Element belonging to the interface in region N
+    # N: Total number of nodes
+    # NE: Total number of elements
+    # Region_M: Region where the BC is applied
+    # Region_N: Region where the BC is applied 
+
     N_prev_M  = sum(N[0:Region_M])
     N_prev_N  = sum(N[0:Region_N])
 
